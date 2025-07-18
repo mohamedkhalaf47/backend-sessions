@@ -1,4 +1,5 @@
 // Simple API Project for movie-theatre
+
 import express from "express";
 import { body, validationResult } from "express-validator";
 
@@ -35,7 +36,7 @@ app.get("/api/movies", (req, res) => {
 	res.json({ success: true, movies });
 });
 
-app.get("/movies/:movieId", (req, res) => {
+app.get("/api/movies/:movieId", (req, res) => {
 	const movieId = +req.params.movieId;
 	const movie = movies.find((movie) => movie.id === movieId);
 	if (!movie) {
