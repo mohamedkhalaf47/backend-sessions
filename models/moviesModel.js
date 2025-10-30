@@ -1,6 +1,14 @@
-let movies = [
-	{ id: 1, title: "Inception", price: 10 },
-	{ id: 2, title: "Spider-Man", price: 15 },
-];
+import mongoose from "mongoose";
 
-export default movies;
+const moviesModel = new mongoose.Schema(
+	{
+		title: { type: String, required: true },
+		price: { type: Number, required: true },
+	},
+	{ versionKey: false, timestamps: true }
+	/* to disable the "__v" field and add "createdAt" and "updatedAt" fields */
+);
+
+const Movies = mongoose.model("Movies", moviesModel);
+
+export default Movies;
