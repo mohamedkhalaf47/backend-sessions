@@ -1,4 +1,4 @@
-import movies from "../models/movie.model.js";
+import movies from "../models/moviesModel.js";
 import { validationResult } from "express-validator";
 
 export const getMovies = (req, res) => {
@@ -38,19 +38,20 @@ export const updateMovie = (req, res) => {
 		return res.json({ success: false, message: "Movie not found" });
 	}
 	movie = { ...movie, ...req.body };
+	movies[movies.findIndex((m) => m.id === movieId)] = movie;
 	return res.json({ success: true, movie });
 };
 
 export const deleteMovie = (req, res) => {
 	const movieId = +req.params.movieId;
-	let movie = movies.find((movie) => movie.id === movieId);
+	const movie = movies.find((movie) => movie.id === movieId);
 	if (!movie) {
 		return res.json({ success: false, message: "Movie not found" });
 	}
-	movies = movies.filter((movie) => movie.id !== movieId);
+	const newMovies = movies.filter((movie) => movie.id !== movieId);
 	res.json({
 		success: true,
 		message: "Movie deleted successfully",
-		data: movies,
+		newMovies,
 	});
 };
