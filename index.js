@@ -1,6 +1,6 @@
 // Simple API Project for movie-theatre
 import express from "express";
-import movieRouter from "./routes/movieRoute";
+import movieRouter from "./routes/movieRoute.js";
 
 const app = express();
 const PORT = 3000;
@@ -9,7 +9,7 @@ const PORT = 3000;
 app.use(express.json()); // To parse JSON bodies
 
 // Routes
-app.use("/api/movies", movieRouter)
+app.use("/api/movies", movieRouter);
 
 app.listen(PORT, () => {
 	console.log("Server is running on port", PORT);
