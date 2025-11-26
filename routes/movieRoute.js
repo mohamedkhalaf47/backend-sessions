@@ -8,18 +8,26 @@ import {
 	updateMovie,
 	deleteMovie,
 } from "../controllers/movieController.js";
+import verifyToken from "../middleware/verifyToken.js";
+import allowedRole from "../middleware/allowedRole.js";
 
 const movieRouter = Router();
 
 movieRouter
 	.route("/")
 	.get(getMovies)
-	.post(movieValidation, createMovie, createMovieHandler);
+	.post(
+		verifyToken,
+		allowedRole("admin"),
+		movieValidation,
+		createMovie,
+		createMovieHandler
+	);
 
 movieRouter
 	.route("/:movieId")
 	.get(getMovieById)
-	.patch(updateMovie)
-	.delete(deleteMovie);
+	.patch(verifyToken, allowedRole("admin"), updateMovie)
+	.delete(verifyToken, allowedRole("admin"), deleteMovie);
 
 export default movieRouter;

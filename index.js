@@ -2,8 +2,8 @@
 import express from "express";
 import movieRouter from "./routes/movieRoute.js";
 import connectMongo from "./config/connectMongo.js";
+import userRouter from "./routes/userRoute.js";
 import "dotenv/config";
-0;
 import cors from "cors";
 
 const app = express();
@@ -17,6 +17,7 @@ app.use(express.json({ limit: "10kb" })); // To parse JSON bodies
 
 // Routes
 app.use("/api/movies", movieRouter);
+app.use("/api/users", userRouter);
 
 /* Global Error Handling Middleware 
 (I made it so i can handle the errors properly in a json format) */
